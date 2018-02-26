@@ -3,8 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
+    
   <ItemGroup>
-    <Compile Remove="Library.fs" />
+    <ProjectReference Include="..\..\FsEssentials\FsEssentials\FsEssentials.fsproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FsGame.fs" />
   </ItemGroup>
 </Project>

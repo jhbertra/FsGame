@@ -1,7 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "FsGame.Core", "FsGame.Core\FsGame.Core.fsproj", "{4EEB2FDD-6CC6-4B19-916C-CF1BC5670F92}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "FsGame", "FsGame.Core\FsGame.fsproj", "{4EEB2FDD-6CC6-4B19-916C-CF1BC5670F92}"
+EndProject
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "FsEssentials", "..\FsEssentials\FsEssentials\FsEssentials.fsproj", "{F7CF28AE-9FAF-4393-85E9-E0D754AE43E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,5 +15,9 @@ Global
 		{4EEB2FDD-6CC6-4B19-916C-CF1BC5670F92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EEB2FDD-6CC6-4B19-916C-CF1BC5670F92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EEB2FDD-6CC6-4B19-916C-CF1BC5670F92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7CF28AE-9FAF-4393-85E9-E0D754AE43E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7CF28AE-9FAF-4393-85E9-E0D754AE43E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7CF28AE-9FAF-4393-85E9-E0D754AE43E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7CF28AE-9FAF-4393-85E9-E0D754AE43E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
