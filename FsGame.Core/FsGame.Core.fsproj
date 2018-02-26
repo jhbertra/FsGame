@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Jamie Bertram</Authors>
+    <Owners>Jamie Bertram</Owners>
+    <PackageProjectUrl>https://github.com/jhbertra/FsGame</PackageProjectUrl>
+    <Summary>A functional-first game framework built on top of MonoGame</Summary>
+    <Title>FsGame.Core</Title>
+    <Description>A functional-first game framework built on top of MonoGame</Description>
+    <PackageId>FsGame.Core</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FsGame.fs" />
+    <Compile Include="Touch.fs" />
+  </ItemGroup>
+</Project>
