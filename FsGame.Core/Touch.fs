@@ -1,7 +1,6 @@
 ﻿namespace FsGame
 
 open Core
-open FsEssentials.Prelude
 
 module Touch =
 
@@ -52,6 +51,25 @@ module Touch =
     //
     // --------- Functions ---------
     //
+
+    let bimapT2 f1 f2 t2 =
+        let a,b = t2
+        (f1 a, f2 b)
+
+
+    let fullJoin list1 list2 key1Selector key2Selector =
+        let notInList list keySelector = (fun x -> List.map keySelector list |> List.contains x |> not)
+        let list1MissingKeys = List.filter (notInList list1 key1Selector) (list2 |> List.map key2Selector)
+        let list2MissingKeys = List.filter (notInList list2 key2Selector) (list1 |> List.map key1Selector)
+        let list1Full =
+            (list1 |> List.map Some |> List.zip (list1 |> List.map key1Selector))
+            @ (list1MissingKeys |> List.map (fun i -> i,None))
+            |> List.sortBy fst
+        let list2Full =
+            (list2 |> List.map Some |> List.zip (list2 |> List.map key2Selector))
+            @ (list2MissingKeys |> List.map (fun i -> i,None))
+            |> List.sortBy fst
+        List.zip list1Full list2Full |> List.map (bimapT2 snd snd)
 
 
     let dragThreshold = 5.0

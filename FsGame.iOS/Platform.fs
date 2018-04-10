@@ -1,7 +1,7 @@
 ﻿namespace FsGame
 
-open FsEssentials
-open Prelude
+open FSharpPlus
+open FSharpPlus.Data
 
 open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Audio
@@ -16,7 +16,7 @@ module iOS =
         
     let scale = 750.0 / float GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width // temporary hard-coded scaling
 
-    let gameSpace = (*) scale
+    let gameSpace = ( * ) scale
 
     let screenSpace x = x / scale
 
@@ -24,7 +24,18 @@ module iOS =
         touchCol
         |> List.ofSeq
         |> List.map (fun touch -> 
-            Touch (touch.Id,touch.Position |> vector2ToFloatTuple |> mapT2 gameSpace |> Point ))
+            Touch (touch.Id,touch.Position |> vector2ToFloatTuple |> bimap gameSpace gameSpace |> Point ))
+
+    let runState initial (State f) = f initial
+
+
+    let mapT4 f t4 =
+        let a,b,c,d = t4
+        (f a, f b, f c, f d)
+
+    
+    let modify f = get |> State.bind (put << f)
+    
 
     type TouchGame<'m, 't>(engine : GameEngine<'m, Touch list, 't>) as this =
         inherit Microsoft.Xna.Framework.Game()
@@ -45,7 +56,7 @@ module iOS =
         let rec runCommands totalTime = function
             | [] -> ()
             | PlaySound (sound, mode, volume)::xs ->
-                Option.maybe {
+                monad {
                     let! sfx = this.sfxInstances.TryFind sound
                     if sfx.State = SoundState.Stopped then
                         sfx.Volume <- float32 volume
@@ -123,11 +134,11 @@ module iOS =
 
 
         let rec runDelayed gameState = function
-        | [] -> State.fromValue gameState.model
+        | [] -> result gameState.model
         | update :: updates ->
-                let (UpdateResult (model,newCommands)) = update gameState
-                State.modify (newCommands |> flip (@))
-                |> State.bind ( fun () -> runDelayed { gameState with model = model } updates )
+            let (UpdateResult (model,newCommands)) = update gameState
+            modify (newCommands |> flip (@)) 
+            |> State.bind ( fun _ -> runDelayed { gameState with model = model } updates )
 
 
         override this.Update(gameTime) =
@@ -151,14 +162,15 @@ module iOS =
                     (gameTime.TotalGameTime.TotalMilliseconds - start.TotalMilliseconds) * 0.001 >= wait )
                 |> List.map ( fun ( _ , _ , update ) -> update )
 
-            let ( commands , model ) = 
-                State.state {
-                    let! model = runDelayed gameState elapsedDelays
-                    let ( UpdateResult ( model , newCommands ) ) = engine.update gameState
-                    do! State.modify (newCommands |> flip (@))
-                    return model
-                }
-                |> State.run []
+            let ( model , commands ) = 
+                    runDelayed gameState elapsedDelays
+                    |> State.bind
+                        (fun model ->
+                            let ( UpdateResult ( model , newCommands ) ) = engine.update gameState
+                            modify (newCommands |> flip (@))
+                            |> State.map (konst model)
+                        )
+                    |> runState []
 
             
             this.delayed <- List.skip ( List.length elapsedDelays ) this.delayed

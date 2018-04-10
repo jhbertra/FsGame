@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Jamie Bertram</Authors>
@@ -9,14 +9,11 @@
     <Title>FsGame.Core</Title>
     <Description>A functional-first game framework built on top of MonoGame</Description>
     <PackageId>FsGame.Core</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
-    <PackageReference Include="FsEssentials_jhbertra" Version="1.0.3" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="FsGame.fs" />
     <Compile Include="Touch.fs" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

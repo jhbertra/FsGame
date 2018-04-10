@@ -12,7 +12,7 @@
     <AssemblyName>FsGame.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <PackageId>FsGame.iOS</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <Authors>Jamie Bertram</Authors>
     <Owners>Jamie Bertram</Owners>
     <PackageProjectUrl>https://github.com/jhbertra/FsGame</PackageProjectUrl>
@@ -58,9 +58,6 @@
     </Reference>
     <Reference Include="FSharp.Core">
       <HintPath>..\packages\FSharp.Core.4.3.4\lib\netstandard1.6\FSharp.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FsEssentials">
-      <HintPath>..\packages\FsEssentials_jhbertra.1.0.3\lib\netstandard2.0\FsEssentials.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives">
       <HintPath>..\packages\FsEssentials_jhbertra.1.0.3\lib\netstandard2.0\Microsoft.Win32.Primitives.dll</HintPath>
@@ -401,8 +398,11 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>..\packages\FsEssentials_jhbertra.1.0.3\lib\netstandard2.0\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
+    <Reference Include="FSharpPlus">
+      <HintPath>..\packages\FSharpPlus.1.0.0-RC2\lib\netstandard2.0\FSharpPlus.dll</HintPath>
+    </Reference>
     <Reference Include="FsGame.Core">
-      <HintPath>..\packages\FsGame.Core.1.0.1\lib\netstandard2.0\FsGame.Core.dll</HintPath>
+      <HintPath>..\packages\FsGame.Core.1.0.2\lib\netstandard2.0\FsGame.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

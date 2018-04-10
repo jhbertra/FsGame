@@ -1,0 +1,3 @@
+source https://www.nuget.org/api/v2
+
+nuget NuGet.Build.Packaging 0.2.0
